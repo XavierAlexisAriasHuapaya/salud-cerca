@@ -1,0 +1,25 @@
+spring:
+  application:
+    name: salud-cerca
+  config:
+    # 1. ATENCIÓN: Aquí SOLO va la estructura de carpetas a partir del backend
+    import: "vault://kv/secret/salud-cerca"
+
+  cloud:
+    vault:
+      # 2. CRÍTICO: Definimos explícitamente que use HTTP (sin S) y el puerto correcto
+      uri: http://localhost:8200
+      token: ${VAULT_TOKEN}
+      kv:
+        enabled: true
+        backend: kv
+      fail-fast: true
+
+  datasource:
+    url: jdbc:mysql://localhost:3306/saludcerca
+    username: ${username_sc}
+    password: ${password_sc}
+
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
