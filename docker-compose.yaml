@@ -1,0 +1,31 @@
+services:
+  vault:
+    image: hashicorp/vault:latest
+    container_name: vault
+    ports:
+      - "8200:8200"
+    cap_add:
+      - IPC_LOCK
+    volumes:
+      - ./vault.hcl:/vault/config/vault.hcl
+      - vault_data:/vault/file
+    command: vault server -config=/vault/config/vault.hcl
+
+  mysql:
+    image: mysql:8.4
+    container_name: mysql-salud-cerca
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: saludcerca
+      MYSQL_USER: saludcerca
+      MYSQL_PASSWORD: 4e1n9iAvZMp4wWoNqv8a
+    ports:
+      - "3306:3306"
+    volumes:
+      - saludcerca_mysql:/var/lib/mysql
+
+volumes:
+  saludcerca_mysql:
+    driver: local
+  vault_data:
