@@ -1,9 +1,9 @@
 spring:
   application:
-    name: salud-cerca
+    name: app-salud-cerca
   config:
     # 1. ATENCIÓN: Aquí SOLO va la estructura de carpetas a partir del backend
-    import: "vault://kv/secret/salud-cerca"
+    import: "vault://"
 
   cloud:
     vault:
